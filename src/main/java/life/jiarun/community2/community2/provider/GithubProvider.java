@@ -5,7 +5,6 @@ import life.jiarun.community2.community2.dto.AccessTokenDTO;
 import life.jiarun.community2.community2.dto.GithubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-
 import java.io.IOException;
 
 @Component
