@@ -1,4 +1,4 @@
-package life.jiarun.community2.community2;
+package life.jiarun.community2;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

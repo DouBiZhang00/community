@@ -1,7 +1,7 @@
-package life.jiarun.community2.community2.controller;
+package life.jiarun.community2.controller;
 
-import life.jiarun.community2.community2.mapper.UserMapper;
-import life.jiarun.community2.community2.model.User;
+import life.jiarun.community2.mapper.UserMapper;
+import life.jiarun.community2.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

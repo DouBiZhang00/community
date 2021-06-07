@@ -1,4 +1,4 @@
-package life.jiarun.community2.community2.dto;
+package life.jiarun.community2.dto;
 
 public class AccessTokenDTO {
     private String client_id;

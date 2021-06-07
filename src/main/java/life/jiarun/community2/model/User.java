@@ -1,4 +1,4 @@
-package life.jiarun.community2.community2.model;
+package life.jiarun.community2.model;
 
 public class User {
     private Integer id;

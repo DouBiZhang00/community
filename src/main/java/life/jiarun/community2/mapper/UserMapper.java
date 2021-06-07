@@ -1,6 +1,6 @@
-package life.jiarun.community2.community2.mapper;
+package life.jiarun.community2.mapper;
 
-import life.jiarun.community2.community2.model.User;
+import life.jiarun.community2.model.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
