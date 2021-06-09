@@ -17,15 +17,20 @@ public class IndexController {
 
     @RequestMapping("/")
     public String index(HttpServletRequest request){
+        //从客户端的请求中得到全部cookies
         Cookie[] cookies = request.getCookies();
-        for(Cookie cookie:cookies){
-            if(cookie.getName().equals("token")){
-                String token = cookie.getValue();
-                User user = userMapper.findByToken(token);
-                if(user!=null){
-                    request.getSession().setAttribute("user", user);
+        //cookie非空情况下遍历全部cookie，若cookie名字为token，使用缓冲层对象的方法根据token查找到token对应的对象，并将该user写入session
+        if (cookies != null && cookies.length != 0) {
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("token")) {
+                    String token = cookie.getValue();
+                    User user = userMapper.findByToken(token);
+                    if (user != null) {
+                        //写入session
+                        request.getSession().setAttribute("user", user);
+                    }
+                    break;
                 }
-                break;
             }
         }
         return "index";

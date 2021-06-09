@@ -1,6 +1,6 @@
 ## 菜鸟社区
 
-##资料
+##资料 
 [Spring 文档](https://spring.io/guides) <br>
 [Spring Web](https://spring.io/guides/gs/serving-web-conteng/) <br>
 [elasticsearch](https://elasticsearch.cn/explore) <br>
@@ -10,6 +10,8 @@
 ##工具
 [Git](https://git-scm.com/download) <br>
 [Visual Paradigm](https://www.visual-paradigm.com) <br>
+[Flyway](https://flywaydb.org/getstarted/firststeps/maven) <br>
+[Lombok](https://projectlombok.org/)
 
 ##脚本
 ```sql

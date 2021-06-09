@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
@@ -36,10 +35,12 @@ public class PublishController {
             HttpServletRequest request,
             Model model
             ){
-
+        //与前端交互的模型数据Model类对象先加入填入表格的属性，方便检验填入错误
+        //前端标签内部可以通过 th:value="${title} 绑定表单数据
         model.addAttribute("title", title);
         model.addAttribute("description", description);
         model.addAttribute("tag", tag);
+        //检验为空错误
         if(title == null || title==""){
             model.addAttribute("error", "标题不能为空");
             return "publish";
@@ -53,6 +54,7 @@ public class PublishController {
             return "publish";
         }
         User user = null;
+        //点入发布界面时，系统会自动根据本地存入的cookie进行自动登录。如果本地没有登录过存入cookie，提示用户未登录错误
         Cookie [] cookies = request.getCookies();
         for(Cookie cookie :cookies){
             if (cookie.getName().equals("token")){
@@ -64,10 +66,12 @@ public class PublishController {
                 break;
             }
         }
+
         if(user == null){
             model.addAttribute("error", "用户未登录");
             return "publish";
         }
+        //创建问题对象，存入数据，同时通过问题持久层对象将数据存入数据库
         Question question = new Question();
         question.setTitle(title);
         question.setDescription(description);
