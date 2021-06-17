@@ -79,6 +79,7 @@ public class PublishController {
         question.setCreator(user.getId());
         question.setGmtCreate(System.currentTimeMillis());
         question.setGmtModified(question.getGmtCreate());
+        //持久层对象插入数据库
         questionMapper.create(question);
         return "redirect:/";
     }

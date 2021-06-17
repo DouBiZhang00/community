@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-group">
                     <label for="title">问题补充(必填，请参照右侧提示):</label>
-                    <textarea name="description" id="description" th:value="${description}" class="form-control"
+                    <textarea name="description" id="description" th:text="${description}" class="form-control"
                               cols="30" rows="10"></textarea>
                 </div>
 
@@ -78,7 +78,6 @@
 
                         <button type="submit" class="btn btn-success btn-publish ">
                             发布</button>
-
                     </div>
                 </div>
             </form>

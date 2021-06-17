@@ -14,5 +14,8 @@ import org.apache.ibatis.annotations.Select;
     //查询，在方法参数内部使用@Param("name")，将传入方法的参数解析进sql语句
     @Select("select * from user where token = #{token}")
     User findByToken(@Param("token") String token);
+
+    @Select("select * from user where id = #{id}")
+    User findById(@Param("id") Integer id);
 }
 
