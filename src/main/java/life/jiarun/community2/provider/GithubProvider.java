@@ -6,6 +6,7 @@ import life.jiarun.community2.dto.GithubUser;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 //OAuth2授权服务提供类
 @Component
@@ -16,7 +17,11 @@ public class GithubProvider {
         //1.指定交互格式为json，字符集为utf-8
         MediaType mediaType = MediaType.get("application/json; charset=utf-8");
         //2.生成客户端对象
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient
+                .Builder()
+                .readTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS).build();
         //3.构建request的body对象，使用FastJson将对象转为JSON字符串
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
         //4.生成request，并发出请求
@@ -37,7 +42,10 @@ public class GithubProvider {
     }
     //根据传入的token值得到第三方服务器的user数据
     public GithubUser getUser(String accessToken){
-        OkHttpClient client = new OkHttpClient();
+        OkHttpClient client = new OkHttpClient.Builder()
+                .readTimeout(30, TimeUnit.SECONDS)
+                .connectTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(30, TimeUnit.SECONDS).build();;
         Request request = new Request.Builder()
                 .url("https://api.github.com/user")
                 .header("Authorization", "token " + accessToken)

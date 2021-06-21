@@ -1,40 +1,31 @@
 package life.jiarun.community2.dto;
 
 import lombok.Data;
-
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 public class PaginationDTO {
+    //存储问题数据
     private List<QuestionDTO> questions;
+    //显示页码按钮
     private boolean showPrevious;
     private boolean showFirstPage;
     private boolean showNext;
     private boolean showEndPage;
     private Integer page;
+    //按钮显示页码的数字集合
     private List<Integer> pages = new ArrayList<>();
     private Integer totalPage;
 
-
-    public void setPagination(Integer totalCount, Integer page, Integer size) {
-
-        if(totalCount % size == 0){
-            totalPage = totalCount / size;
-        }else{
-            totalPage = totalCount / size + 1;
-        }
-
-        if(page < 1){
-            page = 1;
-        }
-
-        if(page > totalPage){
-            page = totalPage;
-        }
-
+    //输入页数总数，当前页数，目标分页数据显示数量进行设置分页相关的数据
+    public void setPagination(Integer totalPage, Integer page) {
+        //得到页面总数
+        this.totalPage = totalPage;
         this.page = page;
         pages.add(page);
+
+        //起始页和最终页显示四页，最多显示7页
         for(int i = 1; i <= 3; i++){
             if(page - i > 0){
                 pages.add(0,page - i);
