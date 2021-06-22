@@ -1,0 +1,22 @@
+<!DOCTYPE generatorConfiguration PUBLIC
+        "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="simple" targetRuntime="MyBatis3">
+<!--        增加分页limit函数支持-->
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+        <jdbcConnection driverClass="org.h2.Driver"
+                        connectionURL="jdbc:h2:~/community"
+                        userId=""
+                        password=""/>
+
+        <javaModelGenerator targetPackage="life.jiarun.community2.model" targetProject="src/main/java"/>
+
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="life.jiarun.community2.mapper" targetProject="src/main/java"/>
+
+        <table tableName="user" domainObjectName="User"/>
+        <table tableName="question" domainObjectName="Question"/>
+    </context>
+</generatorConfiguration>

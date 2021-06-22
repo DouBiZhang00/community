@@ -91,7 +91,7 @@ public class AuthorizeController {
                          HttpServletResponse response) {
         //移除session中的数据
         request.getSession().removeAttribute("user");
-        //清楚cookie
+        //清楚cookie，生成新的token，设置过期时间为马上，并将cookie发回给客户端替换实现清除
         Cookie cookie = new Cookie("token", null);
         cookie.setMaxAge(0);
         response.addCookie(cookie);
