@@ -30,6 +30,7 @@ public class CustomizeErrorController implements ErrorController {
         }
         return new ModelAndView("error");
     }
+    //从请求中得到请求状态码
     private HttpStatus getStatus(HttpServletRequest request){
         Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
         if (statusCode == null){

@@ -1,0 +1,1 @@
+alter table comment Add commentator int null;
