@@ -85,7 +85,7 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
                 <configuration>
-                    <url>jdbc:h2:~/community</url>
+                    <url>jdbc:h2:~/community2</url>
                     <user></user>
                     <password></password>
                 </configuration>
