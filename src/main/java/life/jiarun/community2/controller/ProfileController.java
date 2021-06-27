@@ -3,6 +3,7 @@ package life.jiarun.community2.controller;
 import life.jiarun.community2.dto.PaginationDTO;
 import life.jiarun.community2.mapper.UserMapper;
 import life.jiarun.community2.model.User;
+import life.jiarun.community2.service.NotificationService;
 import life.jiarun.community2.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class ProfileController {
 
     @Autowired
     private QuestionService questionService;
+
+    @Autowired
+    private NotificationService notificationService;
 
     @GetMapping("/profile/{action}")
     public
@@ -36,13 +40,16 @@ public class ProfileController {
         if("questions".equals(action)){
             model.addAttribute("section", "questions");
             model.addAttribute("sectionName", "我的提问");
+            //需要根据userId进行查询返回问题集
+            PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
+            model.addAttribute("pagination", paginationDTO);
         }else if("replies".equals(action)) {
+            PaginationDTO paginationDTO = notificationService.list(user.getId(), page, size);
             model.addAttribute("section", "replies");
+            model.addAttribute("pagination", paginationDTO);
             model.addAttribute("sectionName", "最新回复");
         }
-        //需要根据userId进行查询返回问题集
-        PaginationDTO paginationDTO = questionService.list(user.getId(), page, size);
-        model.addAttribute("pagination", paginationDTO);
+
         return "profile";
     }
 }

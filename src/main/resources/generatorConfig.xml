@@ -6,7 +6,7 @@
 <!--        增加分页limit函数支持-->
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
         <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:~/community"
+                        connectionURL="jdbc:h2:~/community2"
                         userId=""
                         password=""/>
 
@@ -19,5 +19,6 @@
         <table tableName="user" domainObjectName="User"/>
         <table tableName="question" domainObjectName="Question"/>
         <table tableName="comment" domainObjectName="Comment"/>
+        <table tableName="notification" domainObjectName="Notification"/>
     </context>
 </generatorConfiguration>

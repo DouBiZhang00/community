@@ -50,7 +50,7 @@ public class CommentController {
         comment.setLikeCount(0L);
         comment.setCommentCount(0);
         //Service进行内部封装
-        commentService.insert(comment);
+        commentService.insert(comment,user);
         return ResultDTO.okOf();
     }
 

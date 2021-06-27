@@ -1,8 +1,9 @@
 package life.jiarun.community2.service;
 
 import life.jiarun.community2.dto.CommentDTO;
-import life.jiarun.community2.dto.ResultDTO;
 import life.jiarun.community2.enums.CommentTypeEnum;
+import life.jiarun.community2.enums.NotificationStatusEnum;
+import life.jiarun.community2.enums.NotificationTypeEnum;
 import life.jiarun.community2.exception.CustomizeErrorCode;
 import life.jiarun.community2.exception.CustomizeException;
 import life.jiarun.community2.mapper.*;
@@ -11,10 +12,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,8 +37,11 @@ public class CommentService {
     @Autowired
     private CommentExtMapper commentExtMapper;
 
-    @Transactional//开启事务，事务
-    public void insert(Comment comment) {
+    @Autowired
+    private NotificationMapper notificationMapper;
+
+    @Transactional//开启事务
+    public void insert(Comment comment, User commentator) {
         //评论所属的问题id或评论所属的评论没找到，parent_id在type是时表所属问题的id，type是2时表所属评论的id
         if (comment.getParentId() == null || comment.getParentId() == 0) {
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
@@ -58,12 +58,18 @@ public class CommentService {
             if (dbComment == null) {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
+            Question question = questionMapper.selectByPrimaryKey(dbComment.getParentId());
+            if (question == null) {
+                throw new CustomizeException(CustomizeErrorCode.QUESTION_NOT_FOUND);
+            }
             commentMapper.insert(comment);
             //增加评论数
             Comment parentComment = new Comment();
             parentComment.setId(comment.getParentId());
             parentComment.setCommentCount(1);
             commentExtMapper.incCommentCount(parentComment);
+            //创建通知
+            createNotify(comment, dbComment.getCommentator(),commentator.getName(),question.getTitle(), NotificationTypeEnum.REPLY_COMMENT,question.getId());
         } else {
             //回复问题
             Question question = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -72,9 +78,24 @@ public class CommentService {
             }
             //增加问题评论数
             commentMapper.insert(comment);
-            question.setCommentCount(1);
+            question.setCommentCount(1);            createNotify(comment,question.getCreator(),commentator.getName(), question.getTitle(),NotificationTypeEnum.REPLY_QUESTION,question.getId());
+
             questionExtMapper.incCommentCount(question);
+            //创建通知
         }
+    }
+
+    private void createNotify(Comment comment, Long receiver, String notifierName,String outerTitle, NotificationTypeEnum notificationType,Long outerId) {
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setType(notificationType.getType());
+        notification.setOuterid(outerId);
+        notification.setNotifier(comment.getCommentator());
+        notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+        notification.setReceiver(receiver);
+        notification.setNotifierName(notifierName);
+        notification.setOuterTitle(outerTitle);
+        notificationMapper.insert(notification);
     }
 
     //根据输入的问题类型，返回问题下的评论或评论下的二级评论

@@ -39,7 +39,7 @@ public class QuestionService {
 
         Integer totalPage;
         //创建paginationDTO对象同时将所需参数传入，将页面显示问题页码模块功能所需参数矫正
-        PaginationDTO paginationDTO = new PaginationDTO();
+        PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO();
         //使用mybatis generator 取代原来mybatis注解的方式
         Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
 
@@ -78,7 +78,7 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         }
         //将问题对象数组装入
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         return paginationDTO;
     }
 
@@ -87,7 +87,7 @@ public class QuestionService {
 
         Integer totalPage;
         //创建paginationDTO对象同时将所需参数传入，将页面显示问题页码模块功能所需参数矫正
-        PaginationDTO paginationDTO = new PaginationDTO();
+        PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO();
         //表对应的Example类负责拼接sql语句
         QuestionExample questionExample = new QuestionExample();
         questionExample.createCriteria().andCreatorEqualTo(userId);
@@ -128,7 +128,7 @@ public class QuestionService {
             questionDTOList.add(questionDTO);
         }
         //将问题对象数组装入
-        paginationDTO.setQuestions(questionDTOList);
+        paginationDTO.setData(questionDTOList);
         return paginationDTO;
 
     }
