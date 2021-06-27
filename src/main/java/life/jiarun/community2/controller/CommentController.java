@@ -24,16 +24,18 @@ public class CommentController {
 
 
     @ResponseBody
-    @RequestMapping(value = "/comment",method = RequestMethod.POST)
+    @RequestMapping(value = "/comment", method = RequestMethod.POST)
     public Object post(@RequestBody CommentCreateDTO commentCreateDTO,
-                       HttpServletRequest request){
-//        从请求的Session中得到user，对是否登录进行判断
-        User user =(User) request.getSession().getAttribute("user");
-        if(user == null){
+                       HttpServletRequest request) {
+
+        //从请求的Session中得到user，对是否登录进行判断
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
 
-        if(commentCreateDTO == null || StringUtils.isBlank(commentCreateDTO.getContent())){
+        //判断内容是否为非空，StringUtils.isBlank方法快速判断null和""的情况
+        if (commentCreateDTO == null || StringUtils.isBlank(commentCreateDTO.getContent())) {
             return ResultDTO.errorOf(CustomizeErrorCode.CONTENT_IS_EMPTY);
         }
 
@@ -47,14 +49,40 @@ public class CommentController {
         comment.setCommentator(user.getId());
         comment.setLikeCount(0L);
         comment.setCommentCount(0);
+        //Service进行内部封装
         commentService.insert(comment);
         return ResultDTO.okOf();
     }
 
+    //将返回的对象转化为JSON并放入Response的body部分
     @ResponseBody
-    @RequestMapping(value = "/comment/{id}",method = RequestMethod.GET)
-    public ResultDTO<List<CommentDTO>> comments(@PathVariable(name = "id")Long id){
+    @RequestMapping(value = "/comment/{id}", method = RequestMethod.GET)
+    public ResultDTO<List<CommentDTO>> comments(@PathVariable(name = "id") Long id) {
         List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
         return ResultDTO.okOf(commentDTOS);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,10 +1,12 @@
 package life.jiarun.community2.controller;
 
+import life.jiarun.community2.cache.TagCache;
 import life.jiarun.community2.dto.QuestionDTO;
 import life.jiarun.community2.mapper.QuestionMapper;
 import life.jiarun.community2.model.Question;
 import life.jiarun.community2.model.User;
 import life.jiarun.community2.service.QuestionService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,11 +31,13 @@ public class PublishController {
         model.addAttribute("description",question.getDescription());
         model.addAttribute("tag",question.getTag());
         model.addAttribute("id",question.getId());
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
     @GetMapping("/publish")
-    public String publish(){
+    public String publish(Model model){
+        model.addAttribute("tags", TagCache.get());
         return "publish";
     }
 
@@ -50,7 +54,7 @@ public class PublishController {
         //前端标签内部可以通过 th:value="${title} 绑定表单数据
         model.addAttribute("title", title);
         model.addAttribute("description", description);
-        model.addAttribute("tag", tag);
+        model.addAttribute("tags", TagCache.get());
         //检验为空错误
         if(title == null || title==""){
             model.addAttribute("error", "标题不能为空");
@@ -64,6 +68,13 @@ public class PublishController {
             model.addAttribute("error", "标签不能为空");
             return "publish";
         }
+
+        String invalid = TagCache.filterInvalid(tag);
+        if(StringUtils.isNoneBlank(invalid)){
+            model.addAttribute("error","输入非法标签："+invalid);
+            return "publish";
+        }
+
         //点入发布界面时，系统会自动根据本地存入的cookie进行自动登录。如果本地没有登录过存入cookie，提示用户未登录错误
         User user = (User) request.getSession().getAttribute("user");
 

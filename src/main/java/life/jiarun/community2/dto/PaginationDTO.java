@@ -18,7 +18,7 @@ public class PaginationDTO {
     private List<Integer> pages = new ArrayList<>();
     private Integer totalPage;
 
-    //输入页数总数，当前页数，目标分页数据显示数量进行设置分页相关的数据
+    //输入页数总数，当前页数，目标分页数据显示数量进行设置分页相关的数据，使用List存储页面下标
     public void setPagination(Integer totalPage, Integer page) {
         //得到页面总数
         this.totalPage = totalPage;

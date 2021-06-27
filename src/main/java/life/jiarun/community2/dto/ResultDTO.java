@@ -17,6 +17,7 @@ public class ResultDTO<T> {
         resultDTO.setMessage(message);
         return resultDTO;
     }
+
     public static ResultDTO errorOf(CustomizeException e) {
         return errorOf(e.getCode(), e.getMessage());
     }
