@@ -83,11 +83,14 @@ public class NotificationService {
                 .andStatusEqualTo(NotificationStatusEnum.UNREAD.getStatus());
         return notificationMapper.countByExample(notificationExample);
     }
+    //通过通知id得到通知类型，通过通知类型数字组合notificationDTO对象，方便输出信息
     public NotificationDTO read(Long id, User user) {
         Notification notification = notificationMapper.selectByPrimaryKey(id);
+
         if (notification == null) {
             throw new CustomizeException(CustomizeErrorCode.NOTIFICATION_NOT_FOUND);
         }
+
         if (!Objects.equals(notification.getReceiver(), user.getId())) {
             throw new CustomizeException(CustomizeErrorCode.READ_NOTIFICATION_FAIL);
         }

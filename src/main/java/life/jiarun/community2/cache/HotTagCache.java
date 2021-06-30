@@ -16,13 +16,17 @@ public class HotTagCache {
     private List<String> hots = new ArrayList<>();
 
     public void updateTags(Map<String, Integer> tags) {
+
         int max = 10;
+
+        //重写compareTo方法
         PriorityQueue<HotTagDTO> priorityQueue = new PriorityQueue<>(max);
 
         tags.forEach((name, priority) -> {
             HotTagDTO hotTagDTO = new HotTagDTO();
             hotTagDTO.setName(name);
             hotTagDTO.setPriority(priority);
+            //优先队列自动排序
             if (priorityQueue.size() < max) {
                 priorityQueue.add(hotTagDTO);
             } else {
@@ -36,9 +40,9 @@ public class HotTagCache {
 
 
         List<String> sortedTags = new ArrayList<>();
-
         HotTagDTO poll = priorityQueue.poll();
         while (poll != null) {
+            //热度最高优先排列进arraylist
             sortedTags.add(0, poll.getName());
             poll = priorityQueue.poll();
         }

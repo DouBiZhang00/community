@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 
 public class TagCache {
     public static List<TagDTO> get() {
+//        List存储TagDTO,TagDTO存储分类名字和分类内容
         List<TagDTO> tagDTOS = new ArrayList<>();
         TagDTO program = new TagDTO();
         program.setCategoryName("开发语言");
@@ -39,6 +40,7 @@ public class TagCache {
         return tagDTOS;
     }
 
+    //抽取系统没有定义的标签
     public static String filterInvalid(String tags) {
         String[] split = StringUtils.split(tags, ",");
         List<TagDTO> tagDTOS = get();
@@ -48,8 +50,4 @@ public class TagCache {
         return invalid;
     }
 
-    public static void main(String[] args) {
-        int i = (5 - 1) >>> 1;
-        System.out.println(i);
-    }
 }

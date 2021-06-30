@@ -1,11 +1,11 @@
 package life.jiarun.community2.enums;
 
-/**
- * Created by codedrinker on 2019/6/14.
- */
+
 public enum NotificationTypeEnum {
+    //根据回复的类型划分变量
     REPLY_QUESTION(1, "回复了问题"),
     REPLY_COMMENT(2, "回复了评论");
+
     private int type;
     private String name;
 
@@ -23,6 +23,7 @@ public enum NotificationTypeEnum {
         this.name = name;
     }
 
+    //根据数字返回评论类型通知信息
     public static String nameOfType(int type) {
         for (NotificationTypeEnum notificationTypeEnum : NotificationTypeEnum.values()) {
             if (notificationTypeEnum.getType() == type) {

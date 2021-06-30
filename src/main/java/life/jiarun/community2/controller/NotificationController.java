@@ -25,11 +25,14 @@ public class NotificationController {
                           @PathVariable(name = "id") Long id) {
 
         User user = (User) request.getSession().getAttribute("user");
+
         if (user == null) {
             return "redirect:/";
         }
+
         NotificationDTO notificationDTO = notificationService.read(id, user);
 
+        //通知类型是规定的两种类型跳转到对应的问题界面，否则跳转首页
         if (NotificationTypeEnum.REPLY_COMMENT.getType() == notificationDTO.getType()
                 || NotificationTypeEnum.REPLY_QUESTION.getType() == notificationDTO.getType()) {
             return "redirect:/question/" + notificationDTO.getOuterid();

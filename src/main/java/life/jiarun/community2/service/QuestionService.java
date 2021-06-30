@@ -3,6 +3,7 @@ package life.jiarun.community2.service;
 import life.jiarun.community2.dto.PaginationDTO;
 import life.jiarun.community2.dto.QuestionDTO;
 import life.jiarun.community2.dto.QuestionQueryDTO;
+import life.jiarun.community2.enums.SortEnum;
 import life.jiarun.community2.exception.CustomizeErrorCode;
 import life.jiarun.community2.exception.CustomizeException;
 import life.jiarun.community2.mapper.QuestionExtMapper;
@@ -36,16 +37,39 @@ public class QuestionService {
     private QuestionExtMapper questionExtMapper;
 
     //首页展示问题处理方法，输入页码和每页包含元素的数量，返回分页对象
-    public PaginationDTO list(String search, String tag,Integer page, Integer size) {
-        if(StringUtils.isNotBlank(search)){
-            String[] tags = StringUtils.split(search," ");
-            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+    public PaginationDTO list(String search, String tag,String sort,Integer page, Integer size) {
+        if (StringUtils.isNotBlank(search)) {
+            String[] tags = StringUtils.split(search, " ");
+            search = Arrays
+                    .stream(tags)
+                    .filter(StringUtils::isNotBlank)
+                    .map(t -> t.replace("+", "").replace("*", "").replace("?", ""))
+                    .filter(StringUtils::isNotBlank)
+                    .collect(Collectors.joining("|"));
         }
 
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
         questionQueryDTO.setTag(tag);
 
+        if (StringUtils.isNotBlank(tag)) {
+            tag = tag.replace("+", "").replace("*", "").replace("?", "");
+            questionQueryDTO.setTag(tag);
+        }
+
+        for (SortEnum sortEnum : SortEnum.values()) {
+            if (sortEnum.name().toLowerCase().equals(sort)) {
+                questionQueryDTO.setSort(sort);
+
+                if (sortEnum == SortEnum.HOT7) {
+                    questionQueryDTO.setTime(System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 7);
+                }
+                if (sortEnum == SortEnum.HOT30) {
+                    questionQueryDTO.setTime(System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 30);
+                }
+                break;
+            }
+        }
 
         Integer totalPage;
         //创建paginationDTO对象同时将所需参数传入，将页面显示问题页码模块功能所需参数矫正
@@ -194,6 +218,7 @@ public class QuestionService {
         if (StringUtils.isBlank(queryDTO.getTag())) {
             return new ArrayList<>();
         }
+        //通过正则组合
         String[] tags = StringUtils.split(queryDTO.getTag(), ",");
         String regexpTag = Arrays.stream(tags).collect(Collectors.joining("|"));
         Question question = new Question();
@@ -201,6 +226,7 @@ public class QuestionService {
         question.setTag(regexpTag);
 
         List<Question> questions = questionExtMapper.selectRelated(question);
+
         List<QuestionDTO> questionDTOS = questions.stream().map(q -> {
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(q, questionDTO);
