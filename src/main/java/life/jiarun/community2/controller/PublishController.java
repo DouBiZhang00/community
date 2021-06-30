@@ -2,7 +2,6 @@ package life.jiarun.community2.controller;
 
 import life.jiarun.community2.cache.TagCache;
 import life.jiarun.community2.dto.QuestionDTO;
-import life.jiarun.community2.mapper.QuestionMapper;
 import life.jiarun.community2.model.Question;
 import life.jiarun.community2.model.User;
 import life.jiarun.community2.service.QuestionService;

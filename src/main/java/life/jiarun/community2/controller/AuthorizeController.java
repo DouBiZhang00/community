@@ -2,10 +2,10 @@ package life.jiarun.community2.controller;
 
 import life.jiarun.community2.dto.AccessTokenDTO;
 import life.jiarun.community2.dto.GithubUser;
-import life.jiarun.community2.mapper.UserMapper;
 import life.jiarun.community2.model.User;
 import life.jiarun.community2.provider.GithubProvider;
 import life.jiarun.community2.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 @Controller
+@Slf4j
 public class AuthorizeController {
     //OAuth2服务提供类对象，包含方法getToken,getUser
     @Autowired
@@ -79,6 +80,7 @@ public class AuthorizeController {
             return "redirect:/";
             //登录成功，写入cookie
         } else {
+            log.error("callback get github error,{}",githubUser);
             return "redirect:/";
             //登录失败，重新登录
         }

@@ -1,0 +1,43 @@
+2021-06-29 20:05:14.694  INFO 18492 --- [restartedMain] l.j.community2.Community2Application     : Starting Community2Application using Java 1.8.0_202 on 斗笔张的小宝贝 with PID 18492 (D:\编程相关\community2\target\classes started by 54699 in D:\编程相关\community2)
+2021-06-29 20:05:14.695  INFO 18492 --- [restartedMain] l.j.community2.Community2Application     : No active profile set, falling back to default profiles: default
+2021-06-29 20:05:16.035  INFO 18492 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8887 (http)
+2021-06-29 20:05:16.036  INFO 18492 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 20:05:16.037  INFO 18492 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.46]
+2021-06-29 20:05:16.037  INFO 18492 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.19] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2021-06-29 20:05:16.037  INFO 18492 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.19] using APR version [1.6.5].
+2021-06-29 20:05:16.037  INFO 18492 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-06-29 20:05:16.038  INFO 18492 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-06-29 20:05:16.038  INFO 18492 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1a  20 Nov 2018]
+2021-06-29 20:05:16.124  INFO 18492 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 20:05:16.124  INFO 18492 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1421 ms
+2021-06-29 20:05:16.151  INFO 18492 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2021-06-29 20:05:16.174  INFO 18492 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2021-06-29 20:05:16.175  INFO 18492 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/community2'
+2021-06-29 20:05:16.874  INFO 18492 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-29 20:05:16.892  INFO 18492 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8887 (http) with context path ''
+2021-06-29 20:05:16.901  INFO 18492 --- [restartedMain] l.j.community2.Community2Application     : Started Community2Application in 2.315 seconds (JVM running for 633.877)
+2021-06-29 20:05:16.902  INFO 18492 --- [restartedMain] o.s.b.a.ApplicationAvailabilityBean      : Application availability state LivenessState changed to CORRECT
+2021-06-29 20:05:16.903  INFO 18492 --- [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2021-06-29 20:05:16.903  INFO 18492 --- [restartedMain] o.s.b.a.ApplicationAvailabilityBean      : Application availability state ReadinessState changed to ACCEPTING_TRAFFIC
+2021-06-29 20:05:36.946  INFO 20688 --- [restartedMain] l.j.community2.Community2Application     : Starting Community2Application using Java 1.8.0_202 on 斗笔张的小宝贝 with PID 20688 (D:\编程相关\community2\target\classes started by 54699 in D:\编程相关\community2)
+2021-06-29 20:05:36.950  INFO 20688 --- [restartedMain] l.j.community2.Community2Application     : No active profile set, falling back to default profiles: default
+2021-06-29 20:05:37.018  INFO 20688 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2021-06-29 20:05:37.018  INFO 20688 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2021-06-29 20:05:38.189  INFO 20688 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8887 (http)
+2021-06-29 20:05:38.197  INFO 20688 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-06-29 20:05:38.197  INFO 20688 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.46]
+2021-06-29 20:05:38.199  INFO 20688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : An older version [1.2.19] of the Apache Tomcat Native library is installed, while Tomcat recommends a minimum version of [1.2.23]
+2021-06-29 20:05:38.199  INFO 20688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : Loaded Apache Tomcat Native library [1.2.19] using APR version [1.6.5].
+2021-06-29 20:05:38.199  INFO 20688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR capabilities: IPv6 [true], sendfile [true], accept filters [false], random [true].
+2021-06-29 20:05:38.199  INFO 20688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : APR/OpenSSL configuration: useAprConnector [false], useOpenSSL [true]
+2021-06-29 20:05:38.328  INFO 20688 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : OpenSSL successfully initialized [OpenSSL 1.1.1a  20 Nov 2018]
+2021-06-29 20:05:38.417  INFO 20688 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-06-29 20:05:38.417  INFO 20688 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1398 ms
+2021-06-29 20:05:38.443  INFO 20688 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-06-29 20:05:38.578  INFO 20688 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-06-29 20:05:38.587  INFO 20688 --- [restartedMain] o.s.b.a.h2.H2ConsoleAutoConfiguration    : H2 console available at '/h2-console'. Database available at 'jdbc:h2:~/community2'
+2021-06-29 20:05:39.443  INFO 20688 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2021-06-29 20:05:39.478  INFO 20688 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8887 (http) with context path ''
+2021-06-29 20:05:39.490  INFO 20688 --- [restartedMain] l.j.community2.Community2Application     : Started Community2Application in 3.084 seconds (JVM running for 4.477)
+2021-06-29 20:05:39.492  INFO 20688 --- [restartedMain] o.s.b.a.ApplicationAvailabilityBean      : Application availability state LivenessState changed to CORRECT
+2021-06-29 20:05:39.494  INFO 20688 --- [restartedMain] o.s.b.a.ApplicationAvailabilityBean      : Application availability state ReadinessState changed to ACCEPTING_TRAFFIC

@@ -1,8 +1,5 @@
 package life.jiarun.community2.dto;
 
-import life.jiarun.community2.model.User;
-import org.omg.CORBA.PRIVATE_MEMBER;
-
 import lombok.Data;
 @Data
 public class NotificationDTO {

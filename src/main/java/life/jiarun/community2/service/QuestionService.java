@@ -2,6 +2,7 @@ package life.jiarun.community2.service;
 
 import life.jiarun.community2.dto.PaginationDTO;
 import life.jiarun.community2.dto.QuestionDTO;
+import life.jiarun.community2.dto.QuestionQueryDTO;
 import life.jiarun.community2.exception.CustomizeErrorCode;
 import life.jiarun.community2.exception.CustomizeException;
 import life.jiarun.community2.mapper.QuestionExtMapper;
@@ -35,14 +36,22 @@ public class QuestionService {
     private QuestionExtMapper questionExtMapper;
 
     //首页展示问题处理方法，输入页码和每页包含元素的数量，返回分页对象
-    public PaginationDTO list(Integer page, Integer size) {
+    public PaginationDTO list(String search, String tag,Integer page, Integer size) {
+        if(StringUtils.isNotBlank(search)){
+            String[] tags = StringUtils.split(search," ");
+            search = Arrays.stream(tags).collect(Collectors.joining("|"));
+        }
+
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        questionQueryDTO.setTag(tag);
+
 
         Integer totalPage;
         //创建paginationDTO对象同时将所需参数传入，将页面显示问题页码模块功能所需参数矫正
         PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO();
         //使用mybatis generator 取代原来mybatis注解的方式
-        Integer totalCount = (int) questionMapper.countByExample(new QuestionExample());
-
+        Integer totalCount =  questionExtMapper.countBySearch(questionQueryDTO);
         //得到总页数，并对传入页数参数进行矫正
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -62,9 +71,9 @@ public class QuestionService {
         //设置limit所需的偏移量
         Integer offset = size * (page - 1);
         //通过持久层对象返回对应页码所需要的问题对象集合
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questions = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
+        questionQueryDTO.setPage(offset);
+        questionQueryDTO.setSize(size);
+        List<Question> questions = questionExtMapper.selectBySearch(questionQueryDTO);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questions) {
             //遍历问题，通过问题创建者Id查找创建问题的用户
@@ -155,6 +164,7 @@ public class QuestionService {
             question.setViewCount(0);
             question.setLikeCount(0);
             question.setCommentCount(0);
+            question.setSticky(0);
             questionMapper.insert(question);
         } else {
             //更新

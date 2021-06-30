@@ -5,5 +5,7 @@ create table notification(
     outerId BIGINT NOT NULL,
     type INT NOT NULL,
     gmt_create BIGINT NOT NULL,
-    status INT DEFAULT 0 NOT NULL
+    status INT DEFAULT 0 NOT NULL,
+    NOTIFIER_NAME VARCHAR(100) NULL,
+    OUTER_TITLE varchar (256) NULL
 );

@@ -1,7 +1,6 @@
 package life.jiarun.community2.controller;
 
 import life.jiarun.community2.dto.PaginationDTO;
-import life.jiarun.community2.mapper.UserMapper;
 import life.jiarun.community2.model.User;
 import life.jiarun.community2.service.NotificationService;
 import life.jiarun.community2.service.QuestionService;
@@ -27,7 +26,7 @@ public class ProfileController {
     String profile(@PathVariable(name = "action") String action,
                           HttpServletRequest request,
                           @RequestParam(name = "page",defaultValue = "1")Integer page,
-                          @RequestParam(name = "size",defaultValue = "2")Integer size,
+                          @RequestParam(name = "size",defaultValue = "5 ")Integer size,
                           Model model) {
 
         User user = (User) request.getSession().getAttribute("user");

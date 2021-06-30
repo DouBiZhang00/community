@@ -1,12 +1,12 @@
 create table QUESTION
 (
-    ID INT auto_increment
+    ID BIGINT auto_increment
         primary key,
     TITLE VARCHAR(50),
     DESCRIPTION TEXT,
     GMT_CREATE BIGINT,
     GMT_MODIFIED BIGINT,
-    CREATOR INT,
+    CREATOR BIGINT,
     COMMENT_COUNT INT default 0,
     VIEW_COUNT INT default 0,
     LIKE_COUNT INT default 0,
