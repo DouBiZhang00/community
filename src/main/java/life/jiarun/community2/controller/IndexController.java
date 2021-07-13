@@ -25,7 +25,7 @@ public class IndexController {
     @RequestMapping("/")
     public String index(Model model,
                         @RequestParam(name = "page", defaultValue = "1") Integer page,
-                        @RequestParam(name = "size", defaultValue = "8") Integer size,
+                        @RequestParam(name = "size", defaultValue = "5") Integer size,
                         @RequestParam(name = "search", required = false) String search,
                         @RequestParam(name = "tag", required = false) String tag,
                         @RequestParam(name = "sort", required = false) String sort) {
@@ -41,6 +41,7 @@ public class IndexController {
         model.addAttribute("pagination", pagination);
         model.addAttribute("tags", tags);
         model.addAttribute("tag", tag);
+        model.addAttribute("sort",sort);
         return "index";
     }
 }

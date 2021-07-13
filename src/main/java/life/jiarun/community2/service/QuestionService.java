@@ -37,7 +37,7 @@ public class QuestionService {
     private QuestionExtMapper questionExtMapper;
 
     //首页展示问题处理方法，输入页码和每页包含元素的数量，返回分页对象
-    public PaginationDTO list(String search, String tag,String sort,Integer page, Integer size) {
+    public PaginationDTO list(String search, String tag, String sort, Integer page, Integer size) {
         if (StringUtils.isNotBlank(search)) {
             String[] tags = StringUtils.split(search, " ");
             search = Arrays
@@ -60,7 +60,7 @@ public class QuestionService {
         for (SortEnum sortEnum : SortEnum.values()) {
             if (sortEnum.name().toLowerCase().equals(sort)) {
                 questionQueryDTO.setSort(sort);
-
+                //要求查询的时间必须在当前时间减7/30天完成天数限制
                 if (sortEnum == SortEnum.HOT7) {
                     questionQueryDTO.setTime(System.currentTimeMillis() - 1000L * 60 * 60 * 24 * 7);
                 }
@@ -75,7 +75,7 @@ public class QuestionService {
         //创建paginationDTO对象同时将所需参数传入，将页面显示问题页码模块功能所需参数矫正
         PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO();
         //使用mybatis generator 取代原来mybatis注解的方式
-        Integer totalCount =  questionExtMapper.countBySearch(questionQueryDTO);
+        Integer totalCount = questionExtMapper.countBySearch(questionQueryDTO);
         //得到总页数，并对传入页数参数进行矫正
         if (totalCount % size == 0) {
             totalPage = totalCount / size;
@@ -213,6 +213,7 @@ public class QuestionService {
         question.setViewCount(1);
         questionExtMapper.incView(question);
     }
+
     //输入问题，返回使用过相同问题tag的问题集
     public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
         if (StringUtils.isBlank(queryDTO.getTag())) {

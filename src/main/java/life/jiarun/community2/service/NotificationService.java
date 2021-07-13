@@ -25,8 +25,10 @@ public class NotificationService {
     @Autowired
     private NotificationMapper notificationMapper;
 
+    //根据输入的用户id和页面展示大小以及分页数量返回通知内容以及分页相关数据
     public PaginationDTO list(Long userId, Integer page, Integer size) {
 
+//        分页对象存储通知
         PaginationDTO<NotificationDTO> paginationDTO = new PaginationDTO<>();
 
         Integer totalPage;
@@ -34,6 +36,7 @@ public class NotificationService {
         NotificationExample notificationExample = new NotificationExample();
         notificationExample.createCriteria()
                 .andReceiverEqualTo(userId);
+
         Integer totalCount = (int) notificationMapper.countByExample(notificationExample);
 
         if (totalCount % size == 0) {
@@ -76,6 +79,7 @@ public class NotificationService {
         return paginationDTO;
     }
 
+    //修改通知阅读状态为未读
     public Long unreadCount(Long userId) {
         NotificationExample notificationExample = new NotificationExample();
         notificationExample.createCriteria()
@@ -83,7 +87,8 @@ public class NotificationService {
                 .andStatusEqualTo(NotificationStatusEnum.UNREAD.getStatus());
         return notificationMapper.countByExample(notificationExample);
     }
-    //通过通知id得到通知类型，通过通知类型数字组合notificationDTO对象，方便输出信息
+
+    //通过通知id得到通知类型，通过通知类型数字组合notificationDTO对象，方便输出信息。修改通知阅读状态
     public NotificationDTO read(Long id, User user) {
         Notification notification = notificationMapper.selectByPrimaryKey(id);
 
